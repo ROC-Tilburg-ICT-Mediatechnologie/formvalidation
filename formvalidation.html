@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form validation</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="parsley.min.js"></script>
+
+</head>
+<body>
+<script type="text/javascript">
+    $(function () {
+        $('#demo-form').parsley().on('field:validated', function() {
+            var ok = $('.parsley-error').length === 0;
+            $('.bs-callout-info').toggleClass('hidden', !ok);
+            $('.bs-callout-warning').toggleClass('hidden', ok);
+        })
+            .on('form:submit', function() {
+                return false; // Don't submit form for this demo
+            });
+    });
+
+    function ValidateEmail(mail)
+    {
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(myForm.emailAddr.value))
+        {
+            return (true)
+        }
+        alert("Vul is een echte email in")
+        return (false)
+    }
+</script>
+
+<form id="demo-form" data-parsley-validate="">
+    <label for="email">Email * :</label>
+    <input type="email" class="form-control" name="email"  data-parsley-trigger="keyup" data-parsley-minlength="5" data-parsley-maxlength="50" data-parsley-minlength-message="Niet langer dan 50" data-parsley-validation-threshold="10" required="">
+    <input type="submit" class="btn btn-default" value="validate">
+
+</form>
+</body>
+</html>
